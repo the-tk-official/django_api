@@ -12,4 +12,10 @@ class SimpleSerializer(serializers.Serializer):
     extra_name = serializers.CharField(read_only=True)
     created_at = serializers.DateTimeField(read_only=True)
     updated_at = serializers.DateTimeField(read_only=True)
-    
+
+    def create(self, validated_data):
+        return TestModel.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        TestModel.objects.filter(id=instance.id).update(**validated_data)
+        return TestModel.objects.get(id=instance.id)
