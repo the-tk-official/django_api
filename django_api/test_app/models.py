@@ -26,7 +26,7 @@ class TestModel(models.Model):
         verbose_name_plural = 'Test Model'
 
     def save(self, *args, **kwargs):
-        self.extra_name = f'{self.name} | {self.created_at}'
+        self.extra_name = f'{self.name} | {self.is_alive}'
         super().save(*args, **kwargs)
 
 
