@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import debug_toolbar.middleware
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -42,7 +44,10 @@ INSTALLED_APPS = [
     'test_app.apps.TestAppConfig',
     
     # Rest_framework
-    'rest_framework'
+    'rest_framework',
+
+    # Django debug toolbar
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -53,7 +58,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # Django debug toolbar
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+
+# Indicate IPS for working django debug toolbar on your site
+INTERNAL_IPS = (
+    "127.0.0.1",
+)
 
 ROOT_URLCONF = 'django_api.urls'
 
