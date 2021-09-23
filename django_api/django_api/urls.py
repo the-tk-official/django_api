@@ -19,7 +19,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('test/', include(('test_app.urls', 'test_app'), namespace='test'))
+    path('test/', include(('test_app.urls', 'test_app'), namespace='test')),
+    path('gateway/', include(('gateway.urls', 'gateway'), namespace='gateway')),
 ]
 
 # Include debug_toolbar

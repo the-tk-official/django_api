@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # My apps
     'test_app.apps.TestAppConfig',
     'user.apps.UserConfig',
+    'gateway.apps.GatewayConfig',
 
     # Rest_framework
     'rest_framework',
