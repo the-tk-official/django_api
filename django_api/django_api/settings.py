@@ -50,6 +50,9 @@ INSTALLED_APPS = [
 
     # Django debug toolbar
     'debug_toolbar',
+
+    # Django-seed
+    'django_seed',
 ]
 
 MIDDLEWARE = [
