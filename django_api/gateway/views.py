@@ -104,11 +104,11 @@ class RefreshView(APIView):
         return Response({'access': access, 'refresh': refresh})
 
 
-class GetSecuredInfo(APIView):
-    authentication_classes = [Authentication]
-    permission_classes = [IsAuthenticated]
+class TestException(APIView):
 
     def get(self, request):
-        print(request.user)
+        try:
+            a = 2 / 0
+        except Exception as e:
+            raise Exception(e)
         return Response({'data': 'This is a secured info'})
-
