@@ -68,6 +68,9 @@ MIDDLEWARE = [
 
     # Django debug toolbar
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+
+    # Django Cloudinary Storage
+    # 'cloudinary_storage',
 ]
 
 REST_FRAMEWORK = {
@@ -169,9 +172,24 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Media files
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# If use cloudinary, remove MEDIA_ROOT and include DEFAULT_FILE_STORAGE
+#DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'user.CustomUser'
+
+# Enter Your data for Cloudinary
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
+#     'API_KEY': config('CLOUDINARY_API_NAME'),
+#     'API_SECRET': config('CLOUDINARY_API_SECRET')
+# }
