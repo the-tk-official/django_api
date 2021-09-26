@@ -9,10 +9,10 @@ from user.serializers import CustomUserSerializer, UserProfileSerializer
 class CustomUserView(ModelViewSet):
 
     serializer_class = CustomUserSerializer
-    queryset = CustomUser.objects.all()
+    queryset = CustomUser.objects.prefesh_related('user_profile', 'user_profile__address')
 
 
 class UserProfileView(ModelViewSet):
 
     serializer_class = UserProfileSerializer
-    queryset = UserProfile.objects.all()
+    queryset = UserProfile.objects.select_related('user', 'address_info')

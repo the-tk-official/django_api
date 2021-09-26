@@ -29,6 +29,7 @@ class CustomUserManager(BaseUserManager):
 
         return self._create_user(email, password, **extra_fields)
 
+
 class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(unique=True)
@@ -45,10 +46,19 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
+
+class AddressGlobal(models.Model):
+    address = models.TextField()
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
+
+
 class UserProfile(models.Model):
 
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='user_profile')
     profile_picture = models.ImageField(upload_to='profile_pics/%Y/%m/%d/')
+    address_info = models.ForeignKey(AddressGlobal, null=True, on_delete=models.SET_NULL)
     dob = models.DateField()
 
     def __str__(self):
