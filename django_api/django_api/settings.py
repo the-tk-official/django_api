@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'test_app.apps.TestAppConfig',
     'user.apps.UserConfig',
     'gateway.apps.GatewayConfig',
-    'event_controller.apps.EventControllerConfig'
+    'event_controller.apps.EventControllerConfig',
 
     # Rest_framework
     'rest_framework',

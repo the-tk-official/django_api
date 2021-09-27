@@ -34,7 +34,7 @@ class EventFeature(models.Model):
 class EventAttender(models.Model):
 
     eventmain = models.ForeignKey(EventMain, related_name='event_attenders', on_delete=models.CASCADE)
-    user = models.CharField(CustomUser, related_name='user_attendant', on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, related_name='user_attendant', on_delete=models.CASCADE)
     time = models.TimeField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

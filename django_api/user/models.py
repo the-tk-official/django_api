@@ -53,6 +53,8 @@ class AddressGlobal(models.Model):
     state = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
 
+    def __str__(self):
+        return f'{self.id} | {self.country}'
 
 class UserProfile(models.Model):
 

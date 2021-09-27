@@ -23,6 +23,7 @@ urlpatterns = [
     path('test/', include(('test_app.urls', 'test_app'), namespace='test')),
     path('gateway/', include(('gateway.urls', 'gateway'), namespace='gateway')),
     path('user-main/', include(('user.urls', 'user'), namespace='user')),
+    path('event-main/', include(('event_controller.urls', 'event-main'), namespace='event')),
 ]
 
 # Include debug_toolbar
