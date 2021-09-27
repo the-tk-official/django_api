@@ -44,7 +44,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomUserManager()
 
     def __str__(self):
-        return self.email
+        return f'{self.id}  |  {self.name}'
 
 
 class AddressGlobal(models.Model):

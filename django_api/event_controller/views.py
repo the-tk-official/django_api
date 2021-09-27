@@ -1,8 +1,8 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 
-from event_controller.models import EventFeature, EventMain
-from event_controller.serializers import EventFeatureSerializer, EventMainSerializer
+from event_controller.models import EventFeature, EventMain, EventAttender
+from event_controller.serializers import EventFeatureSerializer, EventMainSerializer, EventAttenderSerializer
 from user.serializers import AddressGlobalSerializer, CustomUserSerializer
 from user.models import AddressGlobal
 
@@ -82,3 +82,39 @@ class EventMainView(ModelViewSet):
             f_serializers.save()
 
         return Response(self.serializer_class(self.get_object()).data)
+
+
+class EventAttenderView(ModelViewSet):
+
+    serializer_class = EventAttenderSerializer
+    queryset = EventAttender.objects.select_related('user', 'eventmain')
+
+    def create(self, request, *args, **kwargs):
+        at_serializer = self.serializer_class(data=request.data)
+        at_serializer.is_valid(raise_exception=True)
+
+        evt = EventMainView.queryset.filter(id=at_serializer.validated_data['eventmain_id'])
+        if not evt:
+            raise Exception('Event does not exist')
+
+        evt = evt[0]
+
+        # Check if the user already exist
+        is_user_reg = self.queryset.filter(eventmain_id=evt.id, user_id=at_serializer.validated_data['user_id'])
+        if is_user_reg:
+            raise Exception('You already register for event')
+
+        # Check if the maximum seat has not reached
+        at_count = self.queryset.filter(eventmain_id=evt.id).count()
+
+        if not at_count < evt.max_seat:
+            raise Exception('Maximum attenders')
+
+        # Check Time
+        at_time = at_serializer.validated_data['time']
+
+        if at_time < evt.time:
+            raise Exception('You are too early')
+
+        at_serializer.save()
+        return Response(at_serializer.data, status=201)
